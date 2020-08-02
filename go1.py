@@ -55,7 +55,7 @@ while True:
 
         if len(faces) > 0 :
             max_face = faces[0]
-            max_w = max_face[3]
+            max_w = max_face[2]
 
             #many faces case
             for (x,y,w,h) in faces :
@@ -64,7 +64,7 @@ while True:
                     max_w = w
 
             x,y,w,h = max_face
-            cv2.rectangle(img,(x1,y1),(x1+w1,y1+h1),(255,0,0),3)
+            cv2.rectangle(img,(x,y),(x+w,y+h),(255,0,0),3)
 
 
 
