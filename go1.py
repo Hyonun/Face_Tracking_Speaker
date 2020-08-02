@@ -65,7 +65,7 @@ while True:
                     max_w = w
 
             x,y,w,h = max_face
-            cv2.rectangle(img,(x,y),(x+w,y+h1),COLOR_BLUE,3)
+            cv2.rectangle(img,(x,y),(x+w,y+h),COLOR_BLUE,3)
 
 
 
