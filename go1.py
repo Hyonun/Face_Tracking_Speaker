@@ -17,6 +17,7 @@ dg_y = 90
 MIN_ANGLE = 5
 MAX_ANGLE =175
 
+COLOR_BLUE = (255,0,0)
 
 midfaceY=0
 midfaceX=0
@@ -64,7 +65,7 @@ while True:
                     max_w = w
 
             x,y,w,h = max_face
-            cv2.rectangle(img,(x,y),(x+w,y+h),(255,0,0),3)
+            cv2.rectangle(img,(x,y),(x+w,y+h1),COLOR_BLUE,3)
 
 
 
