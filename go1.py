@@ -33,7 +33,7 @@ stepsize_y = 2
 
 
 #haarcascade_frontalface_default.xml
-faceCascade = cv2.CascadeClassifier('/harr/haarcascade_frontalface_default.xml')
+faceCascade = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
 
 cap = cv2.VideoCapture(0)
 cap.set(3,640) # set Width
@@ -47,34 +47,28 @@ while True:
     
     
         ret, img = cap.read()
-        img = cv2.flip(img, 0)  
+        #img = cv2.flip(img, 0)  
         gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
     
-        faces = faceCascade.detectMultiScale(
-       gray,
-        scaleFactor=1.2,
-        minNeighbors=5,
-        minSize=(40, 40)
-       )
+        faces = faceCascade.detectMultiScale(gray, scaleFactor=1.2,minNeighbors=5,minSize=(40, 40),maxSize=(400,400))
     
     
         if len(faces) > 0 :
                   
         
-           # x,y,w,h = faces[0]
            #many faces case
-            for x,y,w,h in faces :
-                cv2.rectangle(img,(x,y),(x+w,y+h),(255,0,0),3)
+            for (x,y,w,h) in faces :
+                x1,y1,w1,h1 = faces[0]
+                cv2.rectangle(img,(x1,y1),(x1+w1,y1+h1),(255,0,0),3)
+
+                if len(faces) > 1 :
+                    x2,y2,w2,h2 = faces[1]
+
+                    if w2 < w1 :
+                        cv2.rectangle(img,(x2,y2),(x2+w2,y2+h2),(0,255,0),3)
+
         
-        #second closely face detection
-        #make fuction and localizing
-        
-        #
-         #   cropped = img[y - int(h/4):y + h + int(h/4), x - int(w/4):x + w + int(w/4)] 
-         #   cropped_gray = cv2.cvtColor(cropped, cv2.COLOR_BGR2GRAY)
-         #   faces_near = faceCascade.detectMultiScale(
-      # cropped_gray,scaleFactor=1.2,minNeighbors=5,minSize=(40, 40))
     
                 
             roi_gray = gray[y:y+h, x:x+w]
@@ -89,8 +83,8 @@ while True:
             
                 print('center faceX : ', midfaceX)
                 print('center faceY : ', midfaceY)
-                print(' before dg_x : ', dg_x)
-                print(' before dg_x : ', dg_y,"\n")
+                print(' face_width : ', w)
+                print(' face_length : ', h,"\n")
             
             
                 if midfaceY < (midscreenY - midscreenwindow) :
@@ -118,20 +112,15 @@ while True:
                         dg_x -= stepsize_x
                     
             
-        print('realX degree : ', dg_x)
-        print('realY degree : ', dg_y)
-    
         
         degree_x = 600 + 10*(dg_x)
         degree_y = 600 + 10*(dg_y)
         
-        print('after X : ', degree_x)
-        print('after Y : ', degree_y,"\n")
-                    
+        print('no faces')
     
    # pi.set_servo_pulsewidth(18, 0)
     #pi.set_servo_pulsewidth(23, 0) 
-        #pi.set_servo_pulsewidth(18, degree_y) # position anti-clockwise
+       # pi.set_servo_pulsewidth(18, degree_y) # position anti-clockwise
         #pi.set_servo_pulsewidth(23, degree_x) # position anti-clockwise
         sleep(0.015)
 
