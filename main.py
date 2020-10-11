@@ -7,11 +7,11 @@ import cv2 #
 import pygame
 import pigpio
 
-#-----------------------------------------------------------------------------------------------------
+#------------------------------------------------------------------------------------------------------
 
 music_count = 0
 
-music_file = "sound/sample.wav"
+music_file = "sound/inform_voice_.mp3"
 
 NOFACE_MAX = 15
 MUSIC_START = 5
