@@ -15,10 +15,6 @@ music_file = "/home/pi/Desktop/gi/gi/sound/inform_voice.mp3"
 
 Folder = '/home/pi/Desktop/gi/gi/'
 
-
-
-
-
 NOFACE_MAX = 23
 MUSIC_START = 5
 
@@ -92,7 +88,7 @@ while True:
         noface_count = 0
         music_count += 1
 
-        print("there are",len(faces),"faces in this video")
+        #print("there are",len(faces),"faces in this video")
         
         if not pygame.mixer.music.get_busy() and music_count > MUSIC_START :
             
@@ -110,7 +106,7 @@ while True:
                 max_w = w
 
         x,y,w,h = max_face
-        cv2.rectangle(img,(x,y),(x+w,y+h),COLOR_BLUE,3)
+        #cv2.rectangle(img,(x,y),(x+w,y+h),COLOR_BLUE,3)
 
 
 
@@ -161,7 +157,7 @@ while True:
         
         if noface_count > NOFACE_MAX :
             
-            print('no face during 3s. stop music')
+            #print('no face during 3s. stop music')
             
             dg_y -= ((dg_y-110)/16)
             dg_x -= ((dg_x-90)/16)
@@ -179,18 +175,18 @@ while True:
     pi.set_servo_pulsewidth(18, BASE_DEGREE + SUB_ANGLE*(dg_x)) # control servo x
 
 
-    cv2.imshow('video', img) #show video
-    k = cv2.waitKey(1) & 0xff
+    #cv2.imshow('video', img) #show video
+    #k = cv2.waitKey(1) & 0xff
     
-    if k == 27: # press 'ESC' to quit
-        pi.set_servo_pulsewidth(23, 1600) #reset servo position
-        pi.set_servo_pulsewidth(18, 1500)
+    #if k == 27: # press 'ESC' to quit
+    #    pi.set_servo_pulsewidth(23, 1600) #reset servo position
+     #   pi.set_servo_pulsewidth(18, 1500)
 
-        break
+     #   break
 
 
 pi.set_servo_pulsewidth(23, 0) #release servo power
 pi.set_servo_pulsewidth(18, 0)
 
 cap.release()
-cv2.destroyAllWindows()
+#cv2.destroyAllWindows()
